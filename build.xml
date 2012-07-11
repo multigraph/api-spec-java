@@ -1,0 +1,39 @@
+<?xml version="1.0"?>  
+<project default="build">
+
+  <path id="classpath">
+    <pathelement location="bin"/>
+  </path>
+
+  <target name="init">
+    <mkdir dir="bin"/>
+    <mkdir dir="doc"/>
+  </target>
+
+  <target name="clean">
+    <delete dir="bin"/>
+  </target>
+
+  <target name="distclean">
+    <delete dir="bin"/>
+    <delete dir="doc"/>
+  </target>
+
+  <target depends="init,javadoc" name="build">
+    <javac debug="true" destdir="bin" includeantruntime="false">
+      <classpath refid="classpath"/>
+      <src path="src"/>
+    </javac>
+  </target>
+
+  <target name="javadoc" depends="init">
+    <mkdir dir="doc/javadoc"/>
+    <javadoc packagenames="*"
+             destdir="doc"
+             windowtitle="Java Multigraph API">
+      <fileset dir="src" includes="**/*.java" />  
+      <doctitle><![CDATA[<h1>Multigraph</h1>]]></doctitle>
+    </javadoc>
+  </target>
+
+</project>
