@@ -18,6 +18,50 @@ package org.multigraph;
 public abstract class DataValue {
 
     /**
+     * The DataValue.Type enum contains constants representing the various types of DataValue
+     * possible in Multigraph; it has one constant for each DataValue subclass.
+     */
+    public enum Type {
+    
+        /**
+         * A constant standing for the NumberValue type.
+         */
+        NUMBER("number"),
+
+        /**
+         * A constant standing for the DatetimeValue type.
+         */
+        DATETIME("datetime"),
+
+        /**
+         * A constant standing for an unspecified DatetimeValue type.
+         */
+        UNKNOWN("unknown");
+
+        /**
+         * Private constructor; used only within this file to create values of the enum listed above.
+         */
+        private Type(String v) {
+            this.value = v;
+        }
+
+        /**
+         * The string representation of this value.
+         */
+        private final String value;
+
+        /**
+         * Returns the string representation of an enum constant.  For example:
+         * <p>
+         *  System.out.printf("DataValue.Type.NUMBER = %s\n" , DataValue.Type.NUMBER.value());
+         */
+        public String value() {
+            return this.value;
+        }
+    }
+
+
+    /**
      * Return the real number corresponding to this data value. Concrete subclasses
      * must override this.
      */
@@ -29,6 +73,11 @@ public abstract class DataValue {
      * must override this.
      */
     public abstract String toString();
+
+    /**
+     * Create a new DataValue obtained by adding the given measure to this DataValue.
+     */
+    public abstract DataValue add(DataMeasure measure);
 
     /**
      * Comparator function. Concrete subclasses must override this.
