@@ -27,9 +27,9 @@
   </target>
 
   <target name="javadoc" depends="init">
-    <mkdir dir="doc/javadoc"/>
     <javadoc packagenames="*"
              destdir="doc"
+             overview="src/overview.html"
              windowtitle="Java Multigraph API">
       <fileset dir="src" includes="**/*.java" />  
       <doctitle><![CDATA[<h1>Multigraph</h1>]]></doctitle>
