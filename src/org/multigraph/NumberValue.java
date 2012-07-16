@@ -38,4 +38,12 @@ public class NumberValue extends DataValue {
         return new NumberValue(this.mValue + measure.getRealValue());
     }
 
+    /**
+     * Convert a string to a NumberValue.  The string may be anything that can be
+     * interpreted to be a floating point or integer value.
+     */
+    public static DataValue parse(String string) {
+        return new NumberValue(Double.parseDouble(string));
+    }
+
 }

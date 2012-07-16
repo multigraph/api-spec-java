@@ -80,6 +80,21 @@ public abstract class DataValue {
     public abstract DataValue add(DataMeasure measure);
 
     /**
+     * Convert a string to a DataValue.  The value returned will be a concrete
+     * subclass of DataValue, depending on the indicated type.
+     *
+     * @param type the data type to return
+     * @param string the string to convert
+     */
+    public static DataValue parse(DataValue.Type type, String string) {
+        switch (type) {
+        case NUMBER: return NumberValue.parse(string);
+        case DATETIME: return DatetimeValue.parse(string);
+        }
+        return null;
+    }
+
+    /**
      * Comparator function. Concrete subclasses must override this.
      *
      * @param x The value to compare this value to

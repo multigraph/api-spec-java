@@ -26,21 +26,6 @@ public class DatetimeValue extends DataValue {
         this.mValue = value;
     }
 
-    /**
-     * Create a new DatetimeValue object by parsing a string
-     */
-    public DatetimeValue(java.lang.String value) {
-        try {
-            SimpleDateFormat sdf = mFormatters.get(value.length());
-            if (sdf == null) {
-                sdf = mFormatters.get(16);
-            }
-            this.mValue = sdf.parse(value).getTime();
-        } catch (Exception e) {
-            this.mValue = 0;
-        }
-    }
-
     @Override
         public double getRealValue() {
         return mValue;
@@ -110,6 +95,22 @@ public class DatetimeValue extends DataValue {
     @Override public DataValue add(DataMeasure measure) {
         //TODO: Not Yet Implemented
         return null;
+    }
+
+    /**
+     * Convert a string to a DatetimeValue.  The string may be anything that can be
+     * interpreted to be a floating point or integer value.
+     */
+    public static DataValue parse(String string) {
+        try {
+            SimpleDateFormat sdf = mFormatters.get(string.length());
+            if (sdf == null) {
+                sdf = mFormatters.get(16);
+            }
+            return new DatetimeValue(sdf.parse(string).getTime());
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 }
