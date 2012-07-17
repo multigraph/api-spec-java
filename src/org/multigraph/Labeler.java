@@ -4,7 +4,7 @@ package org.multigraph;
 /**
  * The Labeler class is responsible for choosing the positions of tick marks
  * and labels along an axis, and for rendering the labels.  Each Labeler instance
- * is associated with a particular Axis and label/tick spacing, as well as a Formatter
+ * is associated with a particular Axis and label/tick spacing, as well as a DataFormatter
  * object for converting axis data values to strings, and positioning information
  * for the labels.
  * <p>
@@ -14,20 +14,20 @@ package org.multigraph;
 public abstract class Labeler {
         
     protected Axis         mAxis;
-    protected Point2D       mPosition;
+    protected Point2D      mPosition;
     protected double       mAngle;
-    protected Point2D       mAnchor;
-    protected Formatter    mFormatter;
+    protected Point2D      mAnchor;
+    protected DataFormatter    mDataFormatter;
 
     /**
      * Protected constructor, only to be used in subclasses.
      */
-    protected Labeler(Axis axis, Formatter formatter, Point2D position, double angle, Point2D anchor) {
+    protected Labeler(Axis axis, DataFormatter dataFormatter, Point2D position, double angle, Point2D anchor) {
         mAxis         = axis;
         mPosition     = position;
         mAngle        = angle;
         mAnchor       = anchor;
-        mFormatter    = formatter;
+        mDataFormatter    = dataFormatter;
     }
 
     /**
@@ -74,6 +74,6 @@ public abstract class Labeler {
     /**
      * Draw the label associated with a given DataValue along the axis
      */
-    public abstract void renderLabel(GraphicsContext g, DataValue value);
+    public abstract void renderLabel(DataValue value);
     
 }
